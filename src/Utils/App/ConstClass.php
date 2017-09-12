@@ -1,5 +1,5 @@
 <?php
-namespace src\Classes;
+namespace src\Utils\App;
 
 class ConstClass
 {
