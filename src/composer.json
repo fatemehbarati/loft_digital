@@ -10,6 +10,7 @@
             "email": "fatemehbarati@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "src\\": "../src/"
