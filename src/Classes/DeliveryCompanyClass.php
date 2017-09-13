@@ -4,6 +4,10 @@ namespace src\Classes;
 class DeliveryCompanyClass
 {
 
+    /**
+     * name of delivery company
+     * @var string
+     */
     private $name;
 
     /**

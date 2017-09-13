@@ -103,6 +103,10 @@ class DeliveryNoteClass
         $this->deliveryCompany = $deliveryCompany;
     }
 
+    /**
+     * This method create delivery note on specific format
+     * @return string
+     */
     public function getDeliveryNoteInformation(){
         return  $this->transportationType->getName() .
                 ConstClass::FROM_TEXT_PART_IN_NOTE .

@@ -4,6 +4,10 @@ namespace src\Classes;
 class TransportationTypeClass
 {
 
+    /**
+     * name of transportation type
+     * @var string
+     */
     private $name;
 
     /**
