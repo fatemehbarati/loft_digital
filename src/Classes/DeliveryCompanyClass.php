@@ -11,18 +11,19 @@ class DeliveryCompanyClass
     private $name;
 
     /**
+     * DeliveryCompanyClass constructor.
+     * @param string $deliveryCompanyName
+     */
+    public function __construct($deliveryCompanyName)
+    {
+        $this->name = $deliveryCompanyName;
+    }
+
+    /**
      * @return string
      */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 }

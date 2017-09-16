@@ -10,7 +10,7 @@ class OutputClass implements OutputInterface
      * @param DeliveryNoteClass[] $deliveryNotes
      * @return string
      */
-    static function manageOutput($deliveryNotes = array()){
+    public static function manageOutput($deliveryNotes = array()){
 
         $result = '';
 

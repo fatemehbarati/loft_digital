@@ -11,6 +11,16 @@ class TransportationTypeClass
     private $name;
 
     /**
+     * TransportationTypeClass constructor.
+     * @param string $transportationTypeName
+     */
+    public function __construct($transportationTypeName)
+    {
+
+        $this->name = $transportationTypeName;
+    }
+
+    /**
      * @return string
      */
     public function getName()
@@ -18,11 +28,4 @@ class TransportationTypeClass
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
 }

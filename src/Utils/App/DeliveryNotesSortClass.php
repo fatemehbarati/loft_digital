@@ -8,19 +8,19 @@ class DeliveryNotesSortClass implements SortInterface
 {
 
     /** @var DeliveryNoteClass[] */
-    protected static $unOrderedArray;
+    private static $unOrderedArray;
 
     /**
      * This array will fill gradually with ordered items
      * @var DeliveryNoteClass[]
      */
-    protected static $orderedArray = array();
+    private static $orderedArray = array();
 
     /**
      * a temp array for notes which is not ordered yet.
      * @var DeliveryNoteClass[]
      */
-    protected static $tempUnOrderedArray = array();
+    private static $tempUnOrderedArray = array();
 
     /**
      * This method sort array of delivery notes and return array of items
@@ -37,23 +37,23 @@ class DeliveryNotesSortClass implements SortInterface
         }
 
         foreach (self::$unOrderedArray as $key => $unOrderedItem) {
-        if (!$unOrderedItem->getSource() || !$unOrderedItem->getDestination()) {
-            throw new \Exception(Message::MANDATORY_SOURCE_DESTINATION);
-        }
+            if (!$unOrderedItem->getSource() || !$unOrderedItem->getDestination()) {
+                throw new \Exception(Message::MANDATORY_SOURCE_DESTINATION);
+            }
 
-        $source = reset(self::$orderedArray);
-        $source = $source->getSource()->getLocationTextPartInNote();
+            $source = reset(self::$orderedArray);
+            $source = $source->getSource()->getLocationTextPartInNote();
 
-        $destination = end(self::$orderedArray);
-        $destination = $destination->getDestination()->getLocationTextPartInNote();
+            $destination = end(self::$orderedArray);
+            $destination = $destination->getDestination()->getLocationTextPartInNote();
 
-            if ($destination == $unOrderedItem->getSource()->getLocationTextPartInNote() || $source == $unOrderedItem->getDestination()->getLocationTextPartInNote()) {
+            if ($destination === $unOrderedItem->getSource()->getLocationTextPartInNote() || $source === $unOrderedItem->getDestination()->getLocationTextPartInNote()) {
 
-                if ($unOrderedItem->getSource()->getLocationTextPartInNote() == $destination) {
+                if ($unOrderedItem->getSource()->getLocationTextPartInNote() === $destination) {
                     array_push(self::$orderedArray, $unOrderedItem);
                 }
 
-                if ($unOrderedItem->getDestination()->getLocationTextPartInNote() == $source) {
+                if ($unOrderedItem->getDestination()->getLocationTextPartInNote() === $source) {
                     array_unshift(self::$orderedArray, $unOrderedItem);
                 }
 

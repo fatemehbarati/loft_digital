@@ -9,34 +9,26 @@ class DeliveryNoteClass
 {
 
     /** @var  TransportationTypeClass */
-    protected $transportationType;
+    private $transportationType;
 
     /** @var  LocationClass */
-    protected $source;
+    private $source;
 
     /** @var  LocationClass */
-    protected $destination;
+    private $destination;
 
     /** @var  DeliveryCompanyClass */
-    protected $deliveryCompany;
+    private $deliveryCompany;
 
     public function __construct(array $deliveryNote)
     {
 
-        $this->setTransportationType(new TransportationTypeClass());
-        $this->transportationType->setName($deliveryNote['transportationType']);
+        $this->transportationType = new TransportationTypeClass($deliveryNote['transportationType']);
 
-        $this->setSource(new LocationClass());
-        $this->source->setCountryName($deliveryNote['source']['countryName']);
-        $this->source->setPlaceName($deliveryNote['source']['placeName']);
+        $this->source = new LocationClass($deliveryNote['source']['countryName'], $deliveryNote['source']['placeName']);
+        $this->destination = new LocationClass($deliveryNote['destination']['countryName'], $deliveryNote['destination']['placeName']);
 
-        $this->setDestination(new LocationClass());
-        $this->destination->setCountryName($deliveryNote['destination']['countryName']);
-        $this->destination->setPlaceName($deliveryNote['destination']['placeName']);
-
-        $this->setDeliveryCompany(new DeliveryCompanyClass());
-        $this->deliveryCompany->setName($deliveryNote['deliveryCompany']);
-
+        $this->deliveryCompany = new DeliveryCompanyClass($deliveryNote['deliveryCompany']);
     }
 
     /**
@@ -48,27 +40,11 @@ class DeliveryNoteClass
     }
 
     /**
-     * @param TransportationTypeClass $transportationType
-     */
-    public function setTransportationType(TransportationTypeClass $transportationType)
-    {
-        $this->transportationType = $transportationType;
-    }
-
-    /**
      * @return LocationClass
      */
     public function getSource()
     {
         return $this->source;
-    }
-
-    /**
-     * @param LocationClass $source
-     */
-    public function setSource(LocationClass $source)
-    {
-        $this->source = $source;
     }
 
     /**
@@ -80,14 +56,6 @@ class DeliveryNoteClass
     }
 
     /**
-     * @param LocationClass $destination
-     */
-    public function setDestination(LocationClass $destination)
-    {
-        $this->destination = $destination;
-    }
-
-    /**
      * @return DeliveryCompanyClass
      */
     public function getDeliveryCompany()
@@ -96,18 +64,11 @@ class DeliveryNoteClass
     }
 
     /**
-     * @param DeliveryCompanyClass $deliveryCompany
-     */
-    public function setDeliveryCompany(DeliveryCompanyClass $deliveryCompany)
-    {
-        $this->deliveryCompany = $deliveryCompany;
-    }
-
-    /**
      * This method create delivery note on specific format
      * @return string
      */
     public function getDeliveryNoteInformation(){
+
         return  $this->transportationType->getName() .
                 ConstClass::FROM_TEXT_PART_IN_NOTE .
                 $this->source->getLocationTextPartInNote() .
