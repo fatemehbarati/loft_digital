@@ -2,9 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use src\Classes\DeliveryNoteClass;
-use src\Utils\App\DeliveryNotesSortClass;
-use src\Utils\App\OutputClass;
+use src\Utils\App\ArrayInputInitClass;
 
 $deliveryNotesArray = array(
     array(
@@ -69,9 +67,12 @@ $deliveryNotesArray = array(
     ),
 );
 
-foreach ($deliveryNotesArray as $value) {
-    $deliveryNotes[] = new DeliveryNoteClass($value);
+try{
+    $arrayInputInit = new ArrayInputInitClass($deliveryNotesArray);
+    $result = $arrayInputInit->sortAndGetOutput();
+    echo ($result);
+}
+catch (Exception $e){
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
 
-$result = DeliveryNotesSortClass::sort($deliveryNotes);
-var_dump(OutputClass::manageOutput($result));
