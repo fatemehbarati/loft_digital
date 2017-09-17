@@ -10,27 +10,23 @@ use src\Utils\Interfaces\InputInitInterface;
 
 class ArrayInputInitClass implements InputInitInterface
 {
-    const ARRAY_STRUCTURE = array(
-        'transportationType' => '',
-        'source' => array(
-            'countryName' => '',
-            'placeName' => ''
-        ),
-        'destination' => array(
-            'countryName' => '',
-            'placeName' => ''
-        ),
-        'deliveryCompany' =>''
-    );
 
     /** @var DeliveryNoteClass[]  */
     private $inputParameter;
 
+    /** @var array */
     public function __construct($inputData)
     {
         $this->inputParameter = $this->initialize($inputData);
     }
 
+    /**
+     * This method get a base array and check required indexes
+     * @param $inputData
+     * @throws FieldIsNullException
+     * @throws FieldNotSetException
+     * @throws FieldStructureIsNotValidException
+     */
     public function validate($inputData)
     {
 
@@ -96,6 +92,7 @@ class ArrayInputInitClass implements InputInitInterface
     }
 
     /**
+     * This method validate each part of array and convert it to array of DeliveryNote objects
      * @param $inputData
      * @return DeliveryNoteClass[]
      * @throws \Exception
@@ -123,6 +120,10 @@ class ArrayInputInitClass implements InputInitInterface
 
     }
 
+    /**
+     * This method sorts and creates output as a text
+     * @return string
+     */
     public function sortAndGetOutput(){
 
         $deliveryNotes = $this->inputParameter;

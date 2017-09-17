@@ -23,7 +23,7 @@ class DeliveryNotesSortClass implements SortInterface
     private static $tempUnOrderedArray = array();
 
     /**
-     * This method sort array of delivery notes and return array of items
+     * This method sorts array of delivery notes and return array of items
      * @param DeliveryNoteClass[] $items
      * @return array
      */
