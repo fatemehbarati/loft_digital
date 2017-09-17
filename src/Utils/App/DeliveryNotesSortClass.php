@@ -26,7 +26,6 @@ class DeliveryNotesSortClass implements SortInterface
      * This method sort array of delivery notes and return array of items
      * @param DeliveryNoteClass[] $items
      * @return array
-     * @throws \Exception $exception
      */
     public static function sort($items = array()){
 
@@ -37,9 +36,6 @@ class DeliveryNotesSortClass implements SortInterface
         }
 
         foreach (self::$unOrderedArray as $key => $unOrderedItem) {
-            if (!$unOrderedItem->getSource() || !$unOrderedItem->getDestination()) {
-                throw new \Exception(Message::MANDATORY_SOURCE_DESTINATION);
-            }
 
             $source = reset(self::$orderedArray);
             $source = $source->getSource()->getLocationTextPartInNote();
@@ -47,7 +43,9 @@ class DeliveryNotesSortClass implements SortInterface
             $destination = end(self::$orderedArray);
             $destination = $destination->getDestination()->getLocationTextPartInNote();
 
-            if ($destination === $unOrderedItem->getSource()->getLocationTextPartInNote() || $source === $unOrderedItem->getDestination()->getLocationTextPartInNote()) {
+            if ($destination === $unOrderedItem->getSource()->getLocationTextPartInNote()
+                ||
+                $source === $unOrderedItem->getDestination()->getLocationTextPartInNote()) {
 
                 if ($unOrderedItem->getSource()->getLocationTextPartInNote() === $destination) {
                     array_push(self::$orderedArray, $unOrderedItem);

@@ -2,11 +2,15 @@
 
 namespace src\Classes;
 
-
-use src\Utils\App\ConstClass;
-
 class DeliveryNoteClass
 {
+
+    /**
+     * const parameters to parse final string of delivery notes
+     */
+    const DELIVERY_COMPANY_TEXT_PART_IN_NOTE = ". With delivery company ";
+    const FROM_TEXT_PART_IN_NOTE = " from ";
+    const TO_TEXT_PART_IN_NOTE = " to ";
 
     /** @var  TransportationTypeClass */
     private $transportationType;
@@ -29,6 +33,7 @@ class DeliveryNoteClass
         $this->destination = new LocationClass($deliveryNote['destination']['countryName'], $deliveryNote['destination']['placeName']);
 
         $this->deliveryCompany = new DeliveryCompanyClass($deliveryNote['deliveryCompany']);
+
     }
 
     /**
@@ -70,11 +75,11 @@ class DeliveryNoteClass
     public function getDeliveryNoteInformation(){
 
         return  $this->transportationType->getName() .
-                ConstClass::FROM_TEXT_PART_IN_NOTE .
+                self::FROM_TEXT_PART_IN_NOTE .
                 $this->source->getLocationTextPartInNote() .
-                ConstClass::TO_TEXT_PART_IN_NOTE .
+                self::TO_TEXT_PART_IN_NOTE .
                 $this->destination->getLocationTextPartInNote() .
-                ConstClass::DELIVERY_COMPANY_TEXT_PART_IN_NOTE .
+                self::DELIVERY_COMPANY_TEXT_PART_IN_NOTE .
                 $this->deliveryCompany->getName();
 
     }
