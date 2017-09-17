@@ -13,18 +13,22 @@ returned to the seller or consignor as a proof of delivery.
         |--DeliveryNoteClass.php
         |--LocationClass.php
         |--TransportationTypeClass.php
+    |--Exception
+        |--FieldIsNullException.php
+        |--FieldNotSetException.php
+        |--FieldStructureIsNotValidException.php
     |--Test
         |--index.php
     |--Utils
         |--App
-            |--ConstClass.php
+            |--ArrayInputInitClass.php
             |--DeliveryNotesSortClass.php
-            |--Message.php
             |--OutputClass.php
         |--Interfaces
+            |--DNExceptionInterface.php
+            |--InputInitInterface.php
             |--OutputInterface.php
             |--SortInterface.php
-    |--composer.json
 ```
 
 ## Installation
@@ -63,8 +67,8 @@ You can send yor delivery notes as an array which has to have below structure:
 </pre>
 
 After that, you have to rearrange the array of arrays into the 'array of DeliveryNoteClass' Objects.
-Then you can call `DeliveryNoteClass::sort` and pass the proper parameter in order to sort that.
-Finally, you can call `OutputClass::manageOutput` with above result, and get an output string as below:
+Create an object from `ArrayInputInitClass` and pass your array to constructor.Then call `sortAndGetOutput` method of your object. 
+result of that method would be a text of sorted delivery notes as below:
 
 ```
 
